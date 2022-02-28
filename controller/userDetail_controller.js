@@ -1,5 +1,5 @@
 
-const UserDetailModel = require("../model/userDeatil-model")
+const UserDetailModel = require("../model/userDetail_model")
 
 //add [post]
 module.exports.addUserDetail = function (req,res){
@@ -25,7 +25,7 @@ module.exports.addUserDetail = function (req,res){
 
     })
 
-    UserDetail.save(function (err, data){
+    userDetail.save(function (err, data){
         if (err) {
             res.json({ msg: "something went wrong", data: err, status: -1}) 
 
@@ -39,7 +39,7 @@ module.exports.addUserDetail = function (req,res){
 module.exports.getAllUserDetail = function(req,res){
     
 
-    UserDetailModel.find().populate("user").exec(function (err, data){
+    UserDetailModel.find().populate("user").populate("role").exec(function (err, data){
         if (err) {
             res.json({ msg: "something went wrong", data: err, status: -1}) 
 
@@ -67,10 +67,12 @@ module.exports.deleteUserDetail = function(req,res){
 //update
 module.exports.updateUserDetail  = function(req,res){
     let paramuserDetailId = req.body.userId 
-    let paramexperience = req.body.experience
+    
+    let paramqualification = req.body.qualification
+    let paramexperiences = req.body.experience
+    let paramsalary = req.body.salary
     let paramposition = req.body.position
-    let paramqualification  = req.body.qualification 
-    let paramsalary = req.body.salary 
+    
 
     
     
